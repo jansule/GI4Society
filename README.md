@@ -5,7 +5,7 @@ Requires
  - nodejs
  - bower
 
-## Install
+## Install & Run
 1. Clone or download this repository
 2. `npm install`
 3. `bower install`
