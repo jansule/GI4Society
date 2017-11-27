@@ -10,4 +10,4 @@ Requires
 2. `bower install`
 3. `npm start`
 
-Platform runs on port `localhost:8080`.
+Platform runs on `localhost:8080`.
