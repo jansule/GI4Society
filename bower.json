@@ -1,0 +1,20 @@
+{
+  "name": "gi4society",
+  "authors": [
+    "jansule <j_sule02@wwu.de>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jQuery": "^3.2.1"
+  }
+}
