@@ -44,24 +44,33 @@
     }
 
     function prepareData(){
-        console.log('hello world');
         console.log(location.search);
-        var url_query = location.search.replace('?', '');
-        var queries = url_query.split('&');
-        for(var i in queries){
-            var query = queries[i].split('=');
-            // vals[query[0]] = parseInt(query[1]);
-            $('#' + query[0]).slider('setValue', parseInt(query[1]));
+        if(location.search.length != 0){
+
+            var url_query = location.search.replace('?', '');
+            var queries = url_query.split('&');
+            for(var i in queries){
+                var query = queries[i].split('=');
+                // vals[query[0]] = parseInt(query[1]);
+                $('#' + query[0]).slider('setValue', parseInt(query[1]));
+            }
+            console.log(url_query);
+            console.log(queries);
+            console.log(vals);
         }
-        console.log(url_query);
-        console.log(queries);
-        console.log(vals);
     }
 
     function prepareMap(){
-        $.getJSON('../muenster.json', function(json){
-            layer = new L.GeoJSON(json).addTo(mymap);
-            mymap.fitBounds(layer.getBounds());
+        $.ajax({
+            url: '/muenster',
+            method: 'GET',
+            success: function(data, textStatus, xhr){
+                layer = new L.GeoJSON(data).addTo(mymap);
+                mymap.fitBounds(layer.getBounds());
+            },
+            error: function(xhr, textStatus, errorThrown){ 
+                console.log(errorThrown);
+            }
         });
     }
 })();

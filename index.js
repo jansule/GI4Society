@@ -12,7 +12,11 @@ app.use(bodyParser.json({limit: '5mb'}));
 app.use('/', express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
-    res.send(__dirname + 'index.html');
+    res.sendFile(__dirname + '/public/index.html');
+});
+
+app.get('/muenster', function(req, res){
+    res.sendFile(__dirname + '/public/muenster.json');
 });
 
 app.listen(8080, function(){
