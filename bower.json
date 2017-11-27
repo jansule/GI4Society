@@ -1,0 +1,22 @@
+{
+  "name": "muenster-living",
+  "authors": [
+    "jansule <j_sule02@wwu.de>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "leaflet": "^1.2.0",
+    "bootstrap": "^3.3.7",
+    "jQuery": "^3.2.1"
+  }
+}
