@@ -7,7 +7,8 @@ Requires
 
 ## Install
 1. Clone or download this repository
-2. `bower install`
-3. `npm start`
+2. `npm install`
+3. `bower install`
+4. `npm start`
 
 Platform runs on `localhost:8080`.
