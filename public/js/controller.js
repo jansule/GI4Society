@@ -5,72 +5,51 @@
     vals.val2 = 0;
     vals.val3 = 0;
 
-    var layer;
+    var muenster;
+    var mapcontrol;
+
 
     $(window).ready(function(){
-        prepareData();
-        prepareMap();
+        helper.prepareData(vals);
+        mapcontrol = mapper.createMapControl();
+        mapcontrol.addTo(mapper.mymap);
+        mapper.prepareMap(mapcontrol, muenster);
     });
 
     $('#val1').slider().on('change', function(){
         console.log('fired event');
-        vals.slider1 = $('#slider1').slider().data('slider')['$element'][0].dataset.value;
+        vals.val1 = $('#val1').slider('getValue');//.data('slider')['$element'][0].dataset.value;
         console.log(vals.val1);
     });
 
     $('#val2').slider().on('change', function(){
         console.log('fired event');
-        vals.slider1 = $('#slider2').slider().data('slider')['$element'][0].dataset.value;
+        vals.val2 = $('#val2').slider('getValue');//.data('slider')['$element'][0].dataset.value);
         console.log(vals.val2);
+        console.log(typeof vals.val2);
     });
 
     $('#val3').slider().on('change', function(){
         console.log('fired event');
-        vals.slider1 = $('#slider3').slider().data('slider')['$element'][0].dataset.value;
+        vals.val3 = $('#val3').slider('getValue');//.data('slider')['$element'][0].dataset.value;
         console.log(vals.val3);
     });
 
     $('#submit').on('click', function(){
-        submit();
+        helper.submit(vals);
     });
 
-    ////////////
+    $('#success-btn').on('click', function(){
+        /**
+         * TODO:
+         * Write function that calls api-endpoint with positive feedback
+         */
+    });
 
-    function submit(){
-        console.log(vals);
-        var _url = '/?val1=' + vals.slider1 + '&val2=' + vals.slider2 + '&val3=' + vals.slider3;
-        console.log(_url);
-        window.location = _url;
-    }
-
-    function prepareData(){
-        console.log(location.search);
-        if(location.search.length != 0){
-
-            var url_query = location.search.replace('?', '');
-            var queries = url_query.split('&');
-            for(var i in queries){
-                var query = queries[i].split('=');
-                // vals[query[0]] = parseInt(query[1]);
-                $('#' + query[0]).slider('setValue', parseInt(query[1]));
-            }
-            console.log(url_query);
-            console.log(queries);
-            console.log(vals);
-        }
-    }
-
-    function prepareMap(){
-        $.ajax({
-            url: '/muenster',
-            method: 'GET',
-            success: function(data, textStatus, xhr){
-                layer = new L.GeoJSON(data).addTo(mymap);
-                mymap.fitBounds(layer.getBounds());
-            },
-            error: function(xhr, textStatus, errorThrown){ 
-                console.log(errorThrown);
-            }
-        });
-    }
+    $('#fail-btn').on('click', function(){
+        /**
+         * TODO:
+         * Write function that calls api-endpoint with negative feedback
+         */
+    });
 })();
