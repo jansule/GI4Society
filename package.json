@@ -1,0 +1,23 @@
+{
+  "name": "gi4society",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jansule/GI4Society.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jansule/GI4Society/issues"
+  },
+  "homepage": "https://github.com/jansule/GI4Society#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
