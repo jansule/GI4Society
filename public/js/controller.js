@@ -7,12 +7,17 @@
 
     var muenster;
     var mapcontrol;
+    var maplegend;
 
 
     $(window).ready(function(){
         helper.prepareData(vals);
         mapcontrol = mapper.createMapControl();
         mapcontrol.addTo(mapper.mymap);
+
+        maplegend = mapper.createLegend();
+        maplegend.addTo(mapper.mymap);
+        
         mapper.prepareMap(mapcontrol, muenster);
     });
 

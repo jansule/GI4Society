@@ -11,3 +11,24 @@
     margin: 0 0 5px;
     color: #777;
 }
+
+.gi4legend{
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+table.gi4table tbody tr td{
+    font-size: small;
+    padding: 5px;
+}
+
+.gi4rank{
+    text-align: right;
+}
+
+.gi4div{
+    padding: 5px;
+}
