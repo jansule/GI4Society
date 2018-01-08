@@ -3,12 +3,19 @@
  */
 'use strict';
 var helper = {};
+helper.invalid = false;
 helper.submit = function(vals){
-        var _url = '/?val1=' + vals.val1 + '&val2=' + vals.val2 + '&val3=' + vals.val3;
+        // var _url = '/?val1=' + vals.val1 + '&val2=' + vals.val2 + '&val3=' + vals.val3;
+        var _url = '/?';
+        for(var i in vals){
+            _url += i + '=' +  vals[i] + '&';
+        }
         window.location = _url;
     };
 
-helper.prepareData = function(vals){
+helper.factors = {};
+helper.queries = {};
+helper.setFactorsAndQueries = function(){
     if(location.search.length != 0){
 
         var url_query = location.search.replace('?', '');
@@ -16,12 +23,57 @@ helper.prepareData = function(vals){
         for(var i in queries){
             var query = queries[i].split('=');
             var val = parseInt(query[1]);
-            if(val > 1) val = 1;
-            else if(val < -1) val = -1;
-            $('#' + query[0]).slider('setValue', val);
-            vals[query[0]] = val;
-        }
+            switch(val){
+                case -1:
+                    helper.factors[query[0]] = 0;
+                    helper.queries[query[0]] = -1
+                    break;
+                case 0:
+                    helper.factors[query[0]] = 1;
+                    helper.queries[query[0]] = 0;
+                    break;
+                case 1:
+                    helper.factors[query[0]] = 2;
+                    helper.queries[query[0]] = 1;
+                    break;
+                default:
+                    helper.invalid = true;
+                    break;
+            }
+            // if((val == 1){
+            //     helper.factors[query[0]] = 2;
+            // } else {
+            //     throw 'Invalid value in query';
+            //     helper.invalid = true;
+            // }
+            // if(val > 1) val = 1;
+            // else if(val < -1) val = -1;
+            // $('#' + query[0]).slider('setValue', val);
+            // vals[query[0]] = val;
+        } 
+        console.debug('queries', helper.queries);
+    } else {
+        helper.queries.first = 0;
+        helper.queries.second = 0;
     }
+}
+helper.setSliders = function(queries){
+    for(var i in queries){
+        $('#' + i).slider('setValue', queries[i]);
+    }
+    // if(location.search.length != 0){
+
+    //     var url_query = location.search.replace('?', '');
+    //     var queries = url_query.split('&');
+    //     for(var i in queries){
+    //         var query = queries[i].split('=');
+    //         var val = parseInt(query[1]);
+    //         if(val > 1) val = 1;
+    //         else if(val < -1) val = -1;
+    //         $('#' + query[0]).slider('setValue', val);
+    //         vals[query[0]] = val;
+    //     }
+    // }
 };
 
 // define classes from top to bottom
@@ -68,4 +120,13 @@ helper.rank = function(obj){
             }
         }
     }
+};
+
+helper.overallRanking = function(obj){
+    // console.debug('queries', helper.factors);
+    var result = 0;
+    for(var i in obj.ranks){
+        result = result + (helper.factors[i] * obj.ranks[i]);
+    }
+    return result;
 };

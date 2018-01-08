@@ -30,6 +30,8 @@ mapper.prepareMap = function(control, lyrname){
                 // create real ranking
                 feature.properties.ranks = {};
                 helper.rank(feature.properties);
+                feature.properties.overallRanking = helper.overallRanking(feature.properties);
+                console.debug('overallResult', feature.properties);
             }
 
             // layer actions and styles
@@ -75,6 +77,7 @@ mapper.createMapControl = function(){
         this._div.innerHTML = '<h4>Details</h4>';
         if(props){
             this._div.innerHTML += props.feature.properties.Name + '<br>';
+            this._div.innerHTML += '<h5>Overall Ranking: ' + props.feature.properties.overallRanking + '</h5>';
             var tab = '<table class="gi4table">';
             tab += '<tr><td>Factor</td><td>Value</td><td>Rank</td></tr>';
             var pr = props.feature.properties.vals;

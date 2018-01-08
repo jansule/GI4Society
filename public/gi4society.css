@@ -32,3 +32,15 @@ table.gi4table tbody tr td{
 .gi4div{
     padding: 5px;
 }
+
+.slider-tick.round{
+    cursor: pointer;
+}
+
+.slider-handle{
+    cursor: pointer;
+}
+
+.slider-track{
+    cursor: default;
+}
