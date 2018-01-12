@@ -25,30 +25,36 @@
         mapper.prepareMap(mapcontrol, muenster);
     });
 
-    $('#first').slider().on('change', function(){
-        console.log('fired event');
-        helper.queries.first = $('#first').slider('getValue');//.data('slider')['$element'][0].dataset.value;
-        console.log(helper.queries.first);
+    $('#ageDist').slider().on('change', function(){
+        helper.queries.ageDist = $('#ageDist').slider('getValue');
     });
 
-    $('#second').slider().on('change', function(){
-        console.log('fired event');
-        helper.queries.second = $('#second').slider('getValue');//.data('slider')['$element'][0].dataset.value);
-        console.log(helper.queries.second);
-        console.log(typeof helper.queries.second);
+    $('#popDensity').slider().on('change', function(){
+        helper.queries.popDensity = $('#popDensity').slider('getValue');
     });
 
-    // $('#val3').slider().on('change', function(){
-    //     console.log('fired event');
-    //     vals.val3 = $('#val3').slider('getValue');//.data('slider')['$element'][0].dataset.value;
-    //     console.log(vals.val3);
-    // });
+    $('#citizenship').slider().on('change', function(){
+        helper.queries.citizenship = $('#citizenship').slider('getValue');
+    });
+
+    $('#malefemale').slider().on('change', function(){
+        helper.queries.malefemale = $('#malefemale').slider('getValue');
+    });
+
+    $('#employment').slider().on('change', function(){
+        helper.queries.employment = $('#employment').slider('getValue');
+    });
+
+    $('#pricesqm').slider().on('change', function(){
+        helper.queries.pricesqm = $('#pricesqm').slider('getValue');
+    });
 
     $('#submit').on('click', function(){
         helper.submit(helper.queries);
     });
 
     $('#success-btn').on('click', function(){
+        helper.giveFeedback(helper.queries, true);
         /**
          * TODO:
          * Write function that calls api-endpoint with positive feedback
@@ -56,6 +62,7 @@
     });
 
     $('#fail-btn').on('click', function(){
+        helper.giveFeedback(helper.queries, false);
         /**
          * TODO:
          * Write function that calls api-endpoint with negative feedback

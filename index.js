@@ -19,6 +19,15 @@ app.get('/muenster', function(req, res){
     res.sendFile(__dirname + '/public/muenster.json');
 });
 
+app.post('/feedback', function(req, res){
+    console.log('was it helpful? -> ', req.body.helpful);
+    res.status(202).send('everything is find');
+});
+
+app.get('/feedback', function(req, res){
+    console.log('showing feedback');
+    res.status(202).send('showing feedback');
+})
 app.listen(8080, function(){
     console.log('http server now listening on port 8080');
 });

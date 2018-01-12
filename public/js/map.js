@@ -22,16 +22,25 @@ mapper.prepareMap = function(control, lyrname){
             // create ranking for each feature
             for(var i in data.features[0].features){
                 var feature = data.features[0].features[i];
-                // set dummy values
+                /**
+                 * REMOVE THIS PART AND REPLACE WITH ACTUAL VALUES
+                 */
                 feature.properties.vals = {};
-                feature.properties.vals.first = Math.random();
-                feature.properties.vals.second = Math.random();
+                feature.properties.vals.ageDist = Math.random();
+                feature.properties.vals.popDensity = Math.random();
+                feature.properties.vals.citizenship = Math.random();
+                feature.properties.vals.malefemale = Math.random();
+                feature.properties.vals.employment = Math.random();
+                feature.properties.vals.pricesqm = Math.random();
 
+                /**
+                 * END REMOVING
+                 */
                 // create real ranking
                 feature.properties.ranks = {};
                 helper.rank(feature.properties);
                 feature.properties.overallRanking = helper.overallRanking(feature.properties);
-                console.debug('overallResult', feature.properties);
+                // console.debug('overallResult', feature.properties);
             }
 
             // layer actions and styles
@@ -82,7 +91,7 @@ mapper.createMapControl = function(){
             tab += '<tr><td>Factor</td><td>Value</td><td>Rank</td></tr>';
             var pr = props.feature.properties.vals;
             for(var i in pr){
-                tab += '<tr><td>' + i + '</td><td>' + pr[i] + '</td><td class="gi4rank">' + props.feature.properties.ranks[i] + '</td></tr>';
+                tab += '<tr><td>' + i + '</td><td>' + pr[i].toFixed(2) + '</td><td class="gi4rank">' + props.feature.properties.ranks[i] + '</td></tr>';
             }
             tab += '</table>';
             this._div.innerHTML += tab;
@@ -99,7 +108,7 @@ mapper.createLegend = function(){
     ct.onAdd = function(map){
         this._div = L.DomUtil.create('div', 'col gi4control');
         var classes = [];
-        for(var i in helper.classes.first){
+        for(var i in helper.classes.ageDist){
             classes.push(parseInt(i) + 1);
         }
         for(var i in classes){
@@ -119,7 +128,7 @@ mapper.getColor = function(val){
 
 mapper.setStyle = function(feat){
     return {
-        fillColor: mapper.getColor(feat.properties.ranks.first),
+        fillColor: mapper.getColor(feat.properties.overallRanking),
         weight: 1.5,
         opacity: 1,
         color: '#808080',
