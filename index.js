@@ -98,8 +98,11 @@ app.post('/feedback', function(req, res){
 });
 
 app.get('/feedback', function(req, res){
-    console.log('showing feedback');
-    res.status(202).send('showing feedback');
+    console.log('seding feedback');
+    feedbacks.find({}, function(err, value){
+        if(err) console.error(err);
+        res.send(value);
+    })
 });
 
 
