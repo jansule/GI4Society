@@ -21,67 +21,99 @@
                         <div class="col">
                             
                             <h4>
-                                Age Distribution
-                            </h4>
-                            <input id="ageDist" name="ageDistribution" 
-                            data-provide="slider" 
-                            data-slider-min="-1"
-                            data-slider-max="1"
-                            data-slider-step="1"
-                            data-slider-value="0"
-                            data-slider-ticks="[-1,0,1]"
-                            data-slider-ticks-labels='["unimportant", "neutral", "important"]'
-                            data-slider-tooltip="hide">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h4>
                                 Population Density
                             </h4>
-                            
-                            <input id="popDensity" name="popDensity" 
+                            <input id="populationDensity" name="populationDensity" 
                             data-provide="slider" 
                             data-slider-min="-1"
                             data-slider-max="1"
                             data-slider-step="1"
                             data-slider-value="0"
                             data-slider-ticks="[-1,0,1]"
-                            data-slider-ticks-labels='["unimportant", "neutral", "important"]'
+                            data-slider-ticks-labels='["Sparser", "Even", "Denser"]'
                             data-slider-tooltip="hide">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <h4>
-                                Citizenship
+                                Proportion male vs female
                             </h4>
-                            
-                            <input id="citizenship" name="citizenship" 
+                            <input id="populationPctMen" name="populationPctMen" 
                             data-provide="slider" 
                             data-slider-min="-1"
                             data-slider-max="1"
                             data-slider-step="1"
                             data-slider-value="0"
                             data-slider-ticks="[-1,0,1]"
-                            data-slider-ticks-labels='["unimportant", "neutral", "important"]'
+                            data-slider-ticks-labels='["More Male", "Even", "More Female"]'
                             data-slider-tooltip="hide">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <h4>
-                                male vs female percentage
+                                Household Size
                             </h4>
-                            
-                            <input id="malefemale" name="malefemale" 
+                            <input id="AverageHouseHoldSize" name="AverageHouseHoldSize" 
                             data-provide="slider" 
                             data-slider-min="-1"
                             data-slider-max="1"
                             data-slider-step="1"
                             data-slider-value="0"
                             data-slider-ticks="[-1,0,1]"
-                            data-slider-ticks-labels='["unimportant", "neutral", "important"]'
+                            data-slider-ticks-labels='["Few Residents", "Average", "Many Residents"]'
+                            data-slider-tooltip="hide">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h4>
+                                Monthly Rental Price
+                            </h4>
+                            
+                            <input id="AverageMonthlyRentalPrice" name="AverageMonthlyRentalPrice" 
+                            data-provide="slider" 
+                            data-slider-min="-1"
+                            data-slider-max="1"
+                            data-slider-step="1"
+                            data-slider-value="0"
+                            data-slider-ticks="[-1,0,1]"
+                            data-slider-ticks-labels='["Low Rent", "Average", "High Rent"]'
+                            data-slider-tooltip="hide">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h4>
+                                Proportion Citizenship
+                            </h4>
+                            
+                            <input id="ProportionCitizenship" name="ProportionCitizenship" 
+                            data-provide="slider" 
+                            data-slider-min="-1"
+                            data-slider-max="1"
+                            data-slider-step="1"
+                            data-slider-value="0"
+                            data-slider-ticks="[-1,0,1]"
+                            data-slider-ticks-labels='["Less Diverse", "Average", "More Diverse"]'
+                            data-slider-tooltip="hide">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h4>
+                                Age Distribution
+                            </h4>
+                            
+                            <input id="AverageAge" name="AverageAge" 
+                            data-provide="slider" 
+                            data-slider-min="-1"
+                            data-slider-max="1"
+                            data-slider-step="1"
+                            data-slider-value="0"
+                            data-slider-ticks="[-1,0,1]"
+                            data-slider-ticks-labels='["Younger", "Even", "Older"]'
                             data-slider-tooltip="hide">
                         </div>
                     </div>
@@ -91,31 +123,14 @@
                                 Employment Rate
                             </h4>
                             
-                            <input id="employment" name="employment" 
+                            <input id="unemployment" name="unemployment" 
                             data-provide="slider" 
                             data-slider-min="-1"
                             data-slider-max="1"
                             data-slider-step="1"
                             data-slider-value="0"
                             data-slider-ticks="[-1,0,1]"
-                            data-slider-ticks-labels='["unimportant", "neutral", "important"]'
-                            data-slider-tooltip="hide">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h4>
-                                Price per square meter
-                            </h4>
-                            
-                            <input id="pricesqm" name="pricesqm" 
-                            data-provide="slider" 
-                            data-slider-min="-1"
-                            data-slider-max="1"
-                            data-slider-step="1"
-                            data-slider-value="0"
-                            data-slider-ticks="[-1,0,1]"
-                            data-slider-ticks-labels='["unimportant", "neutral", "important"]'
+                            data-slider-ticks-labels='["Unimportant", "Neutral", "Important"]'
                             data-slider-tooltip="hide">
                         </div>
                     </div>
@@ -152,8 +167,8 @@
                     </div>
                 </div>
                 <!-- right side -->
-                <div class="col-md-8">
-                    <div id="mapid" style="height: 85vh;"></div>
+                <div class="container-fluid">
+                    <div id="mapid" style="height: calc(100vh - 50px - 20px);"></div>
                 </div>
             </div>
         </div>

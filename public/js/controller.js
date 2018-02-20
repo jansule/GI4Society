@@ -1,9 +1,5 @@
 (function(){
     'use strict';
-    // var vals = {};
-    // vals.val1 = 0;
-    // vals.val2 = 0;
-    // vals.val3 = 0;
 
     var muenster;
     var mapcontrol;
@@ -21,32 +17,45 @@
 
         maplegend = mapper.createLegend();
         maplegend.addTo(mapper.mymap);
-        
-        mapper.prepareMap(mapcontrol, muenster);
+        helper.getData(function(data){
+            for(var i in data.features){
+                helper.rank(data.features[i].properties);
+                data.features[i].properties.overallScore = helper.overallScore(data.features[i].properties);
+            }
+            console.log('finished computing initial ranking.');
+            console.log('finished computing overallScore');
+            helper.overallRanking(data.features);
+            mapper.prepareMap(mapcontrol, muenster, data);
+        });
+        // mapper.prepareMap(mapcontrol, muenster);
     });
 
-    $('#ageDist').slider().on('change', function(){
-        helper.queries.ageDist = $('#ageDist').slider('getValue');
+    $('#populationDensity').slider().on('change', function(){
+        helper.queries.populationDensity = $('#populationDensity').slider('getValue');
     });
 
-    $('#popDensity').slider().on('change', function(){
-        helper.queries.popDensity = $('#popDensity').slider('getValue');
+    $('#populationPctMen').slider().on('change', function(){
+        helper.queries.populationPctMen = $('#populationPctMen').slider('getValue');
     });
 
-    $('#citizenship').slider().on('change', function(){
-        helper.queries.citizenship = $('#citizenship').slider('getValue');
+    $('#AverageHouseHoldSize').slider().on('change', function(){
+        helper.queries.AverageHouseHoldSize = $('#AverageHouseHoldSize').slider('getValue');
     });
 
-    $('#malefemale').slider().on('change', function(){
-        helper.queries.malefemale = $('#malefemale').slider('getValue');
+    $('#AverageMonthlyRentalPrice').slider().on('change', function(){
+        helper.queries.AverageMonthlyRentalPrice = $('#AverageMonthlyRentalPrice').slider('getValue');
     });
 
-    $('#employment').slider().on('change', function(){
-        helper.queries.employment = $('#employment').slider('getValue');
+    $('#ProportionCitizenship').slider().on('change', function(){
+        helper.queries.ProportionCitizenship = $('#ProportionCitizenship').slider('getValue');
     });
 
-    $('#pricesqm').slider().on('change', function(){
-        helper.queries.pricesqm = $('#pricesqm').slider('getValue');
+    $('#AverageAge').slider().on('change', function(){
+        helper.queries.AverageAge = $('#AverageAge').slider('getValue');
+    });
+
+    $('#unemployment').slider().on('change', function(){
+        helper.queries.unemployment = $('#unemployment').slider('getValue');
     });
 
     $('#submit').on('click', function(){
@@ -55,17 +64,9 @@
 
     $('#success-btn').on('click', function(){
         helper.giveFeedback(helper.queries, true);
-        /**
-         * TODO:
-         * Write function that calls api-endpoint with positive feedback
-         */
     });
 
     $('#fail-btn').on('click', function(){
         helper.giveFeedback(helper.queries, false);
-        /**
-         * TODO:
-         * Write function that calls api-endpoint with negative feedback
-         */
     });
 })();

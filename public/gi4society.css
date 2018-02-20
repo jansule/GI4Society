@@ -44,3 +44,7 @@ table.gi4table tbody tr td{
 .slider-track{
     cursor: default;
 }
+
+input{
+    z-index: 10000;
+}
