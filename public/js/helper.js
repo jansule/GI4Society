@@ -149,15 +149,20 @@ helper.rank = function(obj){
     // }
 };
 
+/**
+ * compute overall score
+ */
 helper.overallScore = function(obj){
     var result = 0;
     for(var i in obj.ranks){
-        // result = result + (helper.factors[i] * obj.ranks[i]);
         result += obj.ranks[i];
     }
     return result;
 };
 
+/**
+ * compute overall ranking
+ */
 helper.overallRanking = function(obj){
     var ranks = [];
     for(var i in obj){
@@ -171,13 +176,13 @@ helper.overallRanking = function(obj){
     helper.percentile75 = ranks[pos75];
 };
 
+// sort function
 helper.sortFct = function(a,b){
     return a-b;
 };
 
+// feedback functionality
 helper.giveFeedback = function(setup, helpful){
-    console.log('setup', JSON.stringify(setup));
-    console.log('helpful', JSON.stringify(helpful));
     $.ajax({
         url: '/feedback',
         method: 'POST',
@@ -189,14 +194,9 @@ helper.giveFeedback = function(setup, helpful){
             console.log('error in feedback');
         }
     });
-    /**
-     * url: '/muenster',
-        method: 'GET',
-        success: function(data, textStatus, xhr){
-        error: function(xhr, textStatus, errorThrown){ 
-     */
 }
 
+// get data from triple store
 helper.getData = function(callback){
     $.ajax({
         url: "http://giv-oct2.uni-muenster.de:8890/sparql?default-graph-uri=http%3A%2F%2Fcourse.geoinfo2017.org%2FGB&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+xsd%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0D%0APREFIX+dbo%3A+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%3E%0D%0APREFIX+geom%3A+%3Chttp%3A%2F%2Fgeovocab.org%2Fgeometry%23%3E%0D%0APREFIX+iso37120%3A+%3Chttp%3A%2F%2Fontology.eil.utoronto.ca%2FISO37120.owl%23%3E%0D%0APREFIX+pcount%3A+%3Chttp%3A%2F%2Fwww.ontotext.com%2Fproton%2Fprotontop%23%3E%0D%0APREFIX+demog%3A+%3Chttp%3A%2F%2Fvocab.demographics.de%3E%0D%0APREFIX+example%3A+%3Chttp%3A%2F%2Fexample.org%2Fdata%2F%3E%0D%0A%0D%0ASELECT+distinct+*%0D%0A%0D%0AWHERE%0D%0A%7B%0D%0A%3Furi+dbo%3ApopulationDensity+%3FpopulationDensity.%0D%0A%3Furi+dbo%3Acity+%3Fcity.%0D%0A%3Furi+dbo%3ApopulationPctMen+%3FpopulationPctMen.%0D%0A%3Furi+dbo%3ApopulationPctWomen+%3FpopulationPctWomen.%0D%0A%3Furi+demog%3AAverageHouseHoldSize+%3FAverageHouseHoldSize.%0D%0A%3Furi+demog%3AAverageMonthlyRentalPrice+%3FAverageMonthlyRentalPrice.%0D%0A%3Furi+demog%3AProportionCitizenship+%3FProportionCitizenship.%0D%0A%3Furi+demog%3AAverageAge+%3FAverageAge.%0D%0A%3Furi+pcount%3ApopulationCount+%3FpopulationCount.%0D%0A%3Furi+iso37120%3A5.1+%3Funemployment.%0D%0A%3Furi+demog%3AAge_0-19+%3FAge_0_19.%0D%0A%3Furi+demog%3AAge_20-39+%3FAge_20_39.%0D%0A%3Furi+demog%3AAge_40-59+%3FAge_40_59.%0D%0A%3Furi+demog%3AAge_60-79+%3FAge_60_79.%0D%0A%3Furi+demog%3AAge_80-inf+%3FAge_80_inf.%0D%0A%3Furi+geom%3APolygon+%3Fpolygon.%0D%0A%7D%0D%0A&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on",

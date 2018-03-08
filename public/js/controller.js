@@ -6,30 +6,32 @@
     var maplegend;
 
 
+    /**
+     * Main controller. Putting together all required setup and handlings
+     */
     $(window).ready(function(){
         helper.setFactorsAndQueries();
-        // TODO
-        // show error page if values are invalid
-        // use helper.invalid for this
         helper.setSliders(helper.queries);
         mapcontrol = mapper.createMapControl();
         mapcontrol.addTo(mapper.mymap);
 
         maplegend = mapper.createLegend();
         maplegend.addTo(mapper.mymap);
+        // Load data from triple store
         helper.getData(function(data){
             for(var i in data.features){
                 helper.rank(data.features[i].properties);
                 data.features[i].properties.overallScore = helper.overallScore(data.features[i].properties);
             }
-            console.log('finished computing initial ranking.');
-            console.log('finished computing overallScore');
+            // computing overall ranking and preparing Map
             helper.overallRanking(data.features);
             mapper.prepareMap(mapcontrol, muenster, data);
         });
-        // mapper.prepareMap(mapcontrol, muenster);
     });
 
+    /**
+     * Listeners for the different sliders
+     */
     $('#populationDensity').slider().on('change', function(){
         helper.queries.populationDensity = $('#populationDensity').slider('getValue');
     });

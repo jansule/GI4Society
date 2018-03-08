@@ -4,6 +4,7 @@
 Requires 
  - nodejs
  - bower
+ - mongoDB
 
 ## Install & Run
 1. Clone or download this repository
@@ -11,4 +12,4 @@ Requires
 3. `bower install`
 4. `npm start`
 
-Platform runs on `localhost:8080`.
+Platform runs on `localhost:8080`. 

@@ -1,3 +1,7 @@
+/**
+ * Defining database schema and exporting it
+ */
+
 "use strict";
 
 var mongoose = require('mongoose');

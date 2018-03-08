@@ -1,3 +1,9 @@
+/** 
+ * Main server file
+*/
+
+"use strict";
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongo = require('./dbConnector.js');
@@ -13,6 +19,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json({limit: '5mb'}));
 app.use('/', express.static(__dirname + '/public'));
 
+// setting up database connection and starting server
 mongo.connect('127.0.0.1:27017', 'feedbackDB', function(err){
     if(err){
         console.error('Aborting: ' + err);
@@ -25,7 +32,9 @@ mongo.connect('127.0.0.1:27017', 'feedbackDB', function(err){
     });
 });
 
-
+/**
+ * Defining routes
+ */
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/public/index.html');
 });

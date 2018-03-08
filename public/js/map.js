@@ -5,6 +5,8 @@
 
 'use strict';
 var mapper = {};
+
+// setting up map
 mapper.mymap = L.map('mapid').setView([51, 7], 13);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -14,67 +16,34 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: 'pk.eyJ1IjoianNoYiIsImEiOiJjaW5nbW12M2kwMDA2dzdrbGVoNTNhaGsxIn0.DCS2ApHL4A5RSVvqnFPZ8Q'
 }).addTo(mapper.mymap);
 
+// creating map
 mapper.prepareMap = function(control, lyrname, data){
     console.log('received data in mapper.prepareMap', data);
-    // $.ajax({
-    //     url: '/muenster',
-    //     method: 'GET',
-    //     success: function(data, textStatus, xhr){
-            // create ranking for each feature
-            // for(var i in data.features[0].features){
-                // var feature = data.features[0].features[i];
-                /**
-                 * REMOVE THIS PART AND REPLACE WITH ACTUAL VALUES
-                 */
-                // feature.properties.vals = {};
-                // feature.properties.vals.ageDist = Math.random();
-                // feature.properties.vals.popDensity = Math.random();
-                // feature.properties.vals.citizenship = Math.random();
-                // feature.properties.vals.malefemale = Math.random();
-                // feature.properties.vals.employment = Math.random();
-                // feature.properties.vals.pricesqm = Math.random();
-
-                /**
-                 * END REMOVING
-                 */
-                // create real ranking
-                // feature.properties.ranks = {};
-                // helper.rank(feature.properties);
-                // feature.properties.overallScore = helper.overallScore(feature.properties);
-                // console.debug('overallResult', feature.properties);
-            // }
-            // helper.overallRanking(data.features[0].features);
-
-            // layer actions and styles
-            lyrname = new L.GeoJSON(data, {
-                onEachFeature: function(feature, layer){
-                    layer.on({
-                        click: function(e){
-                            control.update(e.target);
-                        },
-                        mouseover: function(e){
-                            e.target.setStyle({
-                                color: 'white'
-                            });
-                            e.target.bringToFront();
-                        },
-                        mouseout: function(e){
-                            e.target.setStyle({
-                                color: '#808080'
-                            });
-                        }
-                    });
+    lyrname = new L.GeoJSON(data, {
+        onEachFeature: function(feature, layer){
+            layer.on({
+                click: function(e){
+                    control.update(e.target);
                 },
-                style: mapper.setStyle
-            }).addTo(mapper.mymap);
-            mapper.mymap.fitBounds(lyrname.getBounds());
-    //     },
-    //     error: function(xhr, textStatus, errorThrown){ 
-    //         console.log(errorThrown);
-    //     }
-    // });
+                mouseover: function(e){
+                    e.target.setStyle({
+                        color: 'white'
+                    });
+                    e.target.bringToFront();
+                },
+                mouseout: function(e){
+                    e.target.setStyle({
+                        color: '#808080'
+                    });
+                }
+            });
+        },
+        style: mapper.setStyle
+    }).addTo(mapper.mymap);
+    mapper.mymap.fitBounds(lyrname.getBounds());
 };
 
+// creating Info pane in map
 mapper.createMapControl = function(){
     var control = L.control();
     
@@ -106,35 +75,35 @@ mapper.createMapControl = function(){
     return control;
 };
 
+// create legend
 mapper.createLegend = function(){
     var ct = L.control({position: 'bottomleft'});
     ct.onAdd = function(map){
         this._div = L.DomUtil.create('div', 'col gi4control');
         var classes = [1,2,3];
-        // for(var i in helper.classes.ageDist){
-        //     classes.push(parseInt(i) + 1);
-        // }
         for(var i in classes){
             this._div.innerHTML += '<div class="gi4div"><i class="gi4legend" style="background:' + mapper.legendColor(classes[i]) + '"></i> ' + mapper.getLabel(classes[i])+ '</div>';
         }
         return this._div;
     };
-
     return ct;
- };
+};
 
+// depending on respective class, color of sub-district changes
 mapper.getColor = function(val){
     return val >= helper.percentile75 ? '#5cb85c' : // green
            val >= helper.percentile25 ? '#f0ad4e' : // orange
                      '#d9534f';  // red
 };
 
+// defining colors for legend
 mapper.legendColor = function(val){
     return val > 2 ? '#5cb85c' : // green
            val > 1 ? '#f0ad4e' : // orange
                 '#d9534f';  // red
 }
 
+// setting style for sub-districts in maps
 mapper.setStyle = function(feat){
     return {
         fillColor: mapper.getColor(feat.properties.overallScore),
@@ -145,6 +114,7 @@ mapper.setStyle = function(feat){
     };
 };
 
+// setting labels for legend
 mapper.getLabel = function(val){
     return val > 2 ? 'very good' : // green
     val > 1 ? 'good' : // orange
