@@ -1,5 +1,8 @@
 # GI4Society
 
+Supporting decision making when moving to/within Münster.  
+See also our [Demo](https://www.youtube.com/watch?v=EogYqcbjcpM).
+
 ## Requirements
 Requires 
  - nodejs
